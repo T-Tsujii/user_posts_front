@@ -1,19 +1,13 @@
 import type { NextPage } from 'next';
 import { useState, useEffect } from 'react';
-import { format } from 'date-fns';
 
 import { MetaHead } from '../components/MetaHead';
-import { Links } from '../components/Links';
-import styles from '../styles/Home.module.css';
-import { globalAxios, errorHandling } from '../service/globalAxios';
+import { errorHandling } from '../service/globalAxios';
 
-type PostType = {
-  id: number;
-  username: string;
-  body: string;
-  createdAt: string;
-  updatedAt: string;
-};
+import { fetchPostsService } from '../service/posts';
+import { Post } from '../components/post';
+
+import type { PostType } from '../types/post';
 
 const Csr: NextPage = () => {
   const title = '投稿一覧(CSR)';
@@ -21,8 +15,7 @@ const Csr: NextPage = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
   const fetchPosts = async () => {
     try {
-      const response = await globalAxios.get('/posts');
-      const posts = response.data;
+      const posts = await fetchPostsService();
       setPosts(posts);
     } catch (error) {
       errorHandling(error);
@@ -34,19 +27,13 @@ const Csr: NextPage = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div>
       <MetaHead title={title} />
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>{title}</h1>
-        <Links />
+      <main>
+        <h1>{title}</h1>
         {posts.map((post) => (
-          <div key={post.id}>
-            <div>投稿者名: {post.username}</div>
-            <div>内容: {post.body}</div>
-            <div>投稿日時: {format(new Date(post.createdAt), 'yyyy/MM/dd HH:mm:ss')}</div>
-            <div>更新日時: {format(new Date(post.updatedAt), 'yyyy/MM/dd HH:mm:ss')}</div>
-          </div>
+          <Post key={post.id} post={post} />
         ))}
       </main>
     </div>
