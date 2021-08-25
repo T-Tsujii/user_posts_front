@@ -8,6 +8,7 @@ type PathType = {
 const pathList: PathType[] = [
   { url: '/', title: 'トップページ' },
   { url: '/ssg', title: '投稿一覧(SSG)' },
+  { url: '/isr', title: '投稿一覧(ISR)' },
   { url: '/ssr', title: '投稿一覧(SSR)' },
   { url: '/csr', title: '投稿一覧(CSR)' },
   { url: '/new', title: '新規投稿' },
