@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { MetaHead } from '../components/MetaHead';
-import { SubmitPost } from '../components/SubmitPost'
+import { SubmitPost } from '../components/SubmitPost';
 
 const New: NextPage = () => {
   const title = '新規投稿';

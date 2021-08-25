@@ -20,7 +20,7 @@ const Csr: NextPage = () => {
     } catch (error) {
       errorHandling(error);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     fetchPosts();

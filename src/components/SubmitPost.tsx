@@ -7,31 +7,44 @@ const SubmitPost: React.FC = () => {
   const router = useRouter();
 
   const onChangeBody: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-    setBody(e.currentTarget.value)
-  }, [])
+    setBody(e.currentTarget.value);
+  }, []);
 
-  const onSubmit = useCallback(async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const params = { post: { body } }
-    try {
-      await globalAxios.post('/posts', params)
-      alert('送信しました!')
-      router.push('/')
-    } catch(e) {
-      errorHandling(e)
-    }
-  }, [body, router])
+  const onSubmit = useCallback(
+    async (e: React.SyntheticEvent) => {
+      e.preventDefault();
+      const params = { post: { body } };
+      try {
+        await globalAxios.post('/posts', params);
+        alert('送信しました!');
+        router.push('/');
+      } catch (e) {
+        errorHandling(e);
+      }
+    },
+    [body, router]
+  );
 
   return (
-    <form onSubmit={onSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 select-none">
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="post-body">
+    <form onSubmit={onSubmit} className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 select-none'>
+      <div className='mb-4'>
+        <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='post-body'>
           内容
         </label>
-        <input id="post-body" type="text" value={body} onChange={onChangeBody} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight duration-300 focus:outline-none focus:ring" />
+        <input
+          id='post-body'
+          type='text'
+          value={body}
+          onChange={onChangeBody}
+          className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight duration-300 focus:outline-none focus:ring'
+        />
       </div>
       <div>
-        <button type='submit' disabled={!body} className="bg-blue-500 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 w-full rounded duration-300 focus:outline-none">
+        <button
+          type='submit'
+          disabled={!body}
+          className='bg-blue-500 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 w-full rounded duration-300 focus:outline-none'
+        >
           送信
         </button>
       </div>
