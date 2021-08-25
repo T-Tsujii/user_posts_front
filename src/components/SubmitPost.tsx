@@ -1,16 +1,16 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { errorHandling, globalAxios } from '../service/globalAxios';
 
 const SubmitPost: React.FC = () => {
   const [body, setBody] = useState<string>('');
   const router = useRouter();
 
-  const onChangeBody: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const onChangeBody: React.ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
     setBody(e.currentTarget.value)
-  }
+  }, [])
 
-  const onSubmit = async (e: React.SyntheticEvent) => {
+  const onSubmit = useCallback(async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const params = { post: { body } }
     try {
@@ -20,7 +20,7 @@ const SubmitPost: React.FC = () => {
     } catch(e) {
       errorHandling(e)
     }
-  }
+  }, [body, router])
 
   return (
     <form onSubmit={onSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 select-none">
