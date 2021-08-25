@@ -11,6 +11,7 @@ const pathList: PathType[] = [
   { url: '/isr', title: '投稿一覧(ISR)' },
   { url: '/ssr', title: '投稿一覧(SSR)' },
   { url: '/csr', title: '投稿一覧(CSR)' },
+  { url: '/isrcsr', title: '投稿一覧(ISR+CSR)' },
   { url: '/new', title: '新規投稿' },
 ];
 
