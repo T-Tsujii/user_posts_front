@@ -25,7 +25,7 @@ const Ssr: NextPage<Props> = (props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
   try {
     const posts = await fetchPostsService();
     return {

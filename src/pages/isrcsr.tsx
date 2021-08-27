@@ -42,12 +42,12 @@ const IsrCsr: NextPage<Props> = (props) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   try {
     const postList = await fetchPostsService();
     return {
       props: { postList },
-      revalidate: 3,
+      revalidate: 5,
     };
   } catch (e) {
     return { notFound: true };
